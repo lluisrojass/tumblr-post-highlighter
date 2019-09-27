@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "rootDirs": ["./src", "./__tests__"],
+    "baseUrl": "./src",
+    "types": ["chrome", "jest", "sinon", "node"],
+    "target": "esnext",
+    "strict": true,
+    "paths": {
+      "~/*": ["./*"]
+    }
+  }
+}

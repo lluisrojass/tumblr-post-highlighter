@@ -1,0 +1,10 @@
+*.log
+/node_modules/
+.DS_Store
+.vscode
+yarn-error.log
+/lib
+/__watch__
+/__dist__
+**/\.tmp/
+reports/**

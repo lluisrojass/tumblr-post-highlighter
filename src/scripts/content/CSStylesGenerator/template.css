@@ -1,0 +1,43 @@
+#post-block {
+  opacity: 1 !important;
+  background-color: transparent;
+}
+#post-block:hover {
+  background-color: rgba(0,0,0,0.75);
+  box-shadow: 0 0 20px inset #14af83;
+}
+#post-block * {
+  opacity: 0;
+}
+#post-block:hover * {
+  opacity: 1;
+}
+#post-block:after {
+  box-sizing: border-box;
+  content: '✓';
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  height: 1.25rem;
+  width: 1.25rem;
+  margin: 0.3125rem 0.3125rem 0 0;
+  padding: 0;
+  border-radius: 100%;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  line-height: 1.25rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(15deg, #14af83, #15b89a);
+  font-variant: small-caps;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 
+  'Segoe UI', Roboto, 'Helvetica Neue', 
+  Ubuntu, Arial, sans-serif;
+}
+#post-block:after:hover {
+  background: transparent;
+  color: #15b89a;
+}
