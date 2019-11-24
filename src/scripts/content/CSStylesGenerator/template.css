@@ -1,9 +1,9 @@
 #post-block {
   opacity: 1 !important;
-  background-color: transparent;
+  background-color: transparent !important;
 }
 #post-block:hover {
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0,0,0,0.75) !important;
   box-shadow: 0 0 20px inset #14af83;
 }
 #post-block * {
@@ -36,8 +36,4 @@
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 
   'Segoe UI', Roboto, 'Helvetica Neue', 
   Ubuntu, Arial, sans-serif;
-}
-#post-block:after:hover {
-  background: transparent;
-  color: #15b89a;
 }
