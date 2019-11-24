@@ -9,7 +9,6 @@ type SelectorCache = {
   postBlock: string,
   postBlockHover: string,
   postBlockPseudo: string,
-  postBlockHoverPseudo: string,
   postBlockHoverChildren: string,
   postBlockChildren: string,
 }
@@ -24,7 +23,6 @@ export default class StylesGenerator implements CSStylesGenerator {
       postBlock: '',
       postBlockHover: '',
       postBlockPseudo: '',
-      postBlockHoverPseudo: '',
       postBlockHoverChildren: '',
       postBlockChildren: ''
     };
@@ -42,7 +40,6 @@ export default class StylesGenerator implements CSStylesGenerator {
       const postBlock: Array<string> = [];
       const postBlockHover: Array<string> = [];
       const postBlockPseudo: Array<string> = [];
-      const postBlockHoverPseudo: Array<string> = [];
       const postBlockHoverChildren: Array<string> = [];
       const postBlockChildren: Array<string> = [];
       
@@ -54,7 +51,6 @@ export default class StylesGenerator implements CSStylesGenerator {
         postBlockChildren.push(`${blockSelector} *`); 
         postBlockHoverChildren.push(`${blockSelector}:hover *`);
         postBlockPseudo.push(`${blockSelector}:after`);
-        postBlockHoverPseudo.push(`${blockSelector}:after:hover`);
       });
 
       selectorCache.postBlock += 
@@ -63,8 +59,6 @@ export default class StylesGenerator implements CSStylesGenerator {
         `${selectorCache.postBlockHover && ','}${postBlockHover.join(',')}`;
       selectorCache.postBlockPseudo += 
         `${selectorCache.postBlockPseudo && ','}${postBlockPseudo.join(',')}`;
-      selectorCache.postBlockHoverPseudo += 
-        `${selectorCache.postBlockHoverPseudo && ','}${postBlockHoverPseudo.join(',')}`;
       selectorCache.postBlockHoverChildren += 
         `${selectorCache.postBlockHoverChildren && ','}${postBlockHoverChildren.join(',')}`;
       selectorCache.postBlockChildren += 
@@ -85,7 +79,6 @@ export default class StylesGenerator implements CSStylesGenerator {
       postBlock,
       postBlockHover,
       postBlockPseudo,
-      postBlockHoverPseudo,
       postBlockHoverChildren,
       postBlockChildren
     } = this.selectorGenerator(posts);
@@ -95,7 +88,6 @@ export default class StylesGenerator implements CSStylesGenerator {
       .replace('#post-block:hover', postBlockHover)
       .replace('#post-block *', postBlockChildren)
       .replace('#post-block:hover *', postBlockHoverChildren)
-      .replace('#post-block:after', postBlockPseudo)
-      .replace('#post-block:after:hover', postBlockHoverPseudo);
+      .replace('#post-block:after', postBlockPseudo);
   }
 }
