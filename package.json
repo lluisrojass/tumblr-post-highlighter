@@ -1,6 +1,6 @@
 {
   "name": "tumblr-personal-post-highlighter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A tiny chrome extension that highlights a Tumblr blog's personally uploaded content on their archive.",
   "repository": {
     "type": "git",

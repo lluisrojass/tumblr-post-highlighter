@@ -2,7 +2,7 @@
   "name": "Tumblr personal post highlighter",
   "author": "Luis Rojas <lluisrojass@gmail.com>",
   "manifest_version": 2,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Highlight a blog's uploaded posts",
   "permissions": [
     "declarativeContent",
