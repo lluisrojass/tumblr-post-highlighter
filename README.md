@@ -14,21 +14,23 @@ Just add the extension to your chrome browser and uploaded posts will now sport 
 
 ## Commands
 
-`$ make build`
+This project uses [GNU make](https://www.gnu.org/software/make/) to manage/describe scripts.  
 
-Builds all extension scripts to an isolated directory & copies over relevant ext. files. Run this command to create a production ready package. Aliased to `make`.  
+`$ gmake build`
+
+Builds all extension scripts to an isolated directory & copies over relevant ext. files. Run this command to create a production ready package. Aliased to `gmake`.  
 
 Individual packages can also be built via the `build.content` & `build.background` commands.
 
-`$ make watch.content` | `$ make watch.background`
+`$ gmake watch.content` | `$ gmake watch.background`
 
 Packages a development build of the respective extension packages, runs a watch on package specific source files.
 
-`$ make test`
+`$ gmake test`
 
 Tests all portions of the extension. Testing done with [Jest](https://github.com/facebook/jest)
 
-`$ make clean` 
+`$ gmake clean` 
 
 clean workspace, removes test/dist/watch specific directories & files.
 
