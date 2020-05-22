@@ -10,7 +10,7 @@ This application is the successor to the now outdated [tumblr-scraper](https://g
 
 ## Usage
 
-Just add the extension to your chrome browser and uploaded posts will now sport a green checkmark indicator. To silence/turn off the application for an individual blog simply click on the green application icon. The application will remember this decision and remain hidden until you decide to toggle it back on for a respective archive. 
+Just add the extension to your chrome browser and uploaded posts will now sport a green indicator. To toggle highlighting for a blog, click the green application icon. The extension will remember this decision and remain hidden until it is toggled back on. 
 
 ## Commands
 
@@ -18,21 +18,21 @@ This project uses [GNU make](https://www.gnu.org/software/make/) to manage/descr
 
 `$ gmake build`
 
-Builds all extension scripts to an isolated directory & copies over relevant ext. files. Run this command to create a production ready package. Aliased to `gmake`.  
+Creates a production ready application bundle.
 
 Individual packages can also be built via the `build.content` & `build.background` commands.
 
 `$ gmake watch.content` | `$ gmake watch.background`
 
-Packages a development build of the respective extension packages, runs a watch on package specific source files.
+Creates a development bundle, runs watch on relevant source files.
 
 `$ gmake test`
 
-Tests all portions of the extension. Testing done with [Jest](https://github.com/facebook/jest)
+Executes unit tests. Testing done via [Jest](https://github.com/facebook/jest)
 
 `$ gmake clean` 
 
-clean workspace, removes test/dist/watch specific directories & files.
+Cleans all generated files/directories. 
 
 ## Licence 
 
