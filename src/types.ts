@@ -569,7 +569,7 @@ export interface APISnifferRequestAnalyzer {
    * 
    * @returns {boolean}
    */
-  isAPICall(info: RequestInfo, init?: RequestInit): boolean;
+  isAPICall(info: RequestInfo | URL, init?: RequestInit): boolean;
 }
 export interface APISnifferRequestAnalyzerStatics {
   /**

@@ -124,7 +124,7 @@ describe('FetchHijacker', () => {
         hijacker.hijack(blogname);
         await fetch('https://test-url.com/favorite-food?user=luis');
       } catch (err) {
-        caught = err;
+        caught = err as Error;
       }
 
       expect(fetchStub.calledOnce).toBeTruthy();

@@ -34,7 +34,7 @@ export default class StorageService implements CSStorageService {
           reject(new Error('chrome unable to update local storage'));
         }
 
-        resolve();
+        resolve(undefined);
       });
     });
   }

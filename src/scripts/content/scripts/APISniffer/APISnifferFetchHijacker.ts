@@ -24,7 +24,7 @@ const FetchHijacker: APISnifferHijackerStatics = class Hijacker implements APISn
       return new Observable<Array<TumblrPost>>((subscriber) => {
         const originalFetch = window.fetch;
   
-        const fetch = async (info: RequestInfo, init?: RequestInit) => {
+        const fetch = async (info: RequestInfo | URL, init?: RequestInit) => {
           const requestAnalyzer = new RequestAnalyzer(blogname);
           if (!requestAnalyzer.isAPICall(info, init)) {
             return originalFetch(info, init);

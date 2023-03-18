@@ -1,6 +1,6 @@
 {
   "name": "tumblr-personal-post-highlighter",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A tiny chrome extension that highlights a Tumblr blog's personally uploaded content on their archive.",
   "repository": {
     "type": "git",
@@ -37,10 +37,33 @@
     "babel-jest": "^29.5.0",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "rimraf": "^4.4.0",
     "rollup": "^3.19.1",
+    "rollup-plugin-banner2": "^1.2.2",
     "rollup-plugin-postcss": "^4.0.2",
     "sinon": "^15.0.2",
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "clean": "npm run clean-dist && npm run clean-watch && npm run clean-test",
+    "clean:dist": "rimraf ./__dist__",
+    "clean:watch": "rimraf ./__watch__",
+    "clean:test": "rimraf ./reports",
+    "tsc": "tsc --project ./tsconfig.json",
+    "test": "jest",
+    "link:watch": "ln -shF ./manifest.json ./__watch__/manifest.json && ln -shF ./icons ./__watch__/icons",
+    "mkdir:watch": "mkdir ./__watch__",
+    "mkdir:build": "mkdir ./__dist__",
+    "prepare:watch": "npm run clean:watch && npm run mkdir:watch && npm run link:watch",
+    "prepare:build": "npm run clean:dist && npm run mkdir:build && && npm run cp:build",
+    "cp:build": "cp ./manifest.json ./__dist__/manifest.json && cp -R ./icons ./__dist__/icons",
+    "watch:background": "rollup --bundleConfigAsCjs --watch --environment NODE_ENV:development,BUILD:development --config ./tools/configs/background.config.js",
+    "watch:content": "rollup --bundleConfigAsCjs --watch --environment NODE_ENV:development,BUILD:development --config ./tools/configs/content.config.js",
+    "build:background": "rollup --bundleConfigAsCjs --environment NODE_ENV:production,BUILD:production --config ./tools/configs/background.config.js",
+    "build:content": "rollup --bundleConfigAsCjs --environment NODE_ENV:production,BUILD:production --config ./tools/configs/content.config.js",
+    "build": "npm run prepare:build && npm run build:background && npm run build:content"
   }
 }

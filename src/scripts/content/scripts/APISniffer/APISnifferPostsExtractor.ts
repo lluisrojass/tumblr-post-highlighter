@@ -63,7 +63,7 @@ const PostsExtractor: APISnifferPostsExtractorStatics = class Extractor implemen
         const responseClone = fetchResponse.clone();
         responseObject = await responseClone.json();
       } catch (err) {
-        logger.warn(`Error converting api response ${err.message}`);
+        logger.warn(`Error converting api response ${(err as Error).message}`);
         return [];
       }
 

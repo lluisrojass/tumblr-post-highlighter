@@ -19,7 +19,8 @@ describe('SupportAnalyzer', () => {
     });
 
     it('should indicate lack of support when fetch API unavailable', () => {
-      delete window.fetch;
+      // @ts-ignore-next-line
+      window.fetch = undefined;
       const isWindowSupported = supportAnalyzer.isWindowSupported();
       expect(isWindowSupported).toBeFalsy();
     });

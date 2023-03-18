@@ -9,7 +9,7 @@ import isObj from '~/utils/isObj';
 const RequestAnalyzer: APISnifferRequestAnalyzerStatics = class Analyzer implements APISnifferRequestAnalyzer {
     constructor(private blogname: string) {}
 
-    public isAPICall = (info: RequestInfo, init?: RequestInit) => {
+    public isAPICall = (info: RequestInfo | URL, init?: RequestInit) => {
       if (!(typeof info === 'string' && info)) return false;
       if (init && isObj(init) && (init.method || 'GET') !== 'GET') return false;
       
