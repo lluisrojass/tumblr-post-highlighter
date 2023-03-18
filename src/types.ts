@@ -628,12 +628,6 @@ export interface APISnifferHijackerStatics {
 }
 export interface APISnifferController extends ExtScriptController {
   /**
-   * Analyze the current page, update model with outcome of analysis.
-   * 
-   * @returns {void}
-   */
-  analyzePage(): void;
-  /**
    * Send an update to the content script.
    * 
    * @returns {void}
@@ -645,6 +639,9 @@ export interface APISnifferController extends ExtScriptController {
    * @returns {void}
    */
   hijackAjaxRequests(): void;
+
+  obtainBlogName(): void;
+  obtainPageStatus(): Promise<void>;
 }
 export interface APISnifferControllerStatics {
   /**

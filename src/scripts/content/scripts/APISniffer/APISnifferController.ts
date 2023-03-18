@@ -19,30 +19,49 @@ const Controller: APISnifferControllerStatics = class C implements APISnifferCon
     private hijacker: APISnifferHijacker, 
     private supportAnalyzer: APISnifferSupportAnalyzer
   ) {}
-  
-  public analyzePage = () => {
-    if (!this.supportAnalyzer.isWindowSupported()) {
-      this.model.setStatus(PageStatus.UNSUPPORTED);
-      return;
-    } else if (!this.supportAnalyzer.isHealthyArchive()) {
-      this.model.setStatus(PageStatus.NOT_OK_ARCHIVE);
-      return;
-    }
-  
+
+  public obtainBlogName = () => {
     const blogname = extractBlogname(window.location.hostname);
     if (!blogname) {
-      this.model.setStatus(PageStatus.UNSUPPORTED);
+      logger.warn('Unable to extract blog name');
       return;
-    } 
-  
-    this.model.setStatus(PageStatus.OK);
+    }
+
     this.model.setBlogname(blogname);
+  }
+  
+  public obtainPageStatus = (): Promise<void> => {
+    if (document.readyState === 'complete') {
+      const status = this.obtainPageStatusFromDocument();
+      console.log('LUIS setting status as', status);
+      this.model.setStatus(status);
+    }
+
+    return new Promise((resolve) => {
+      document.addEventListener('readystatechange', (e) => {
+        // @ts-ignore
+        if (e.target?.readyState !== 'complete') return;
+
+        const status = this.obtainPageStatusFromDocument();
+        console.log('LUIS setting status as (from handler)', status);
+        this.model.setStatus(status);
+        resolve();
+      });
+    })
+  }
+
+  private obtainPageStatusFromDocument = () => {
+    if (!this.supportAnalyzer.isWindowSupported()) return PageStatus.UNSUPPORTED;
+    else if (!this.supportAnalyzer.isHealthyArchive()) return PageStatus.NOT_OK_ARCHIVE;
+    
+    return PageStatus.OK;
   }
   
   public sendUpdateToContentScript = () => {
     const status = this.model.getStatus();
     const blogname = this.model.getBlogname();
     
+    console.log('sending update to content script!', status, blogname);
     this.contentScriptService.sendUpdate({ 
       status,
       blogname
@@ -50,18 +69,19 @@ const Controller: APISnifferControllerStatics = class C implements APISnifferCon
   }
   
   public hijackAjaxRequests = () => {
-    const status = this.model.getStatus();
-    if (isOKStatus(status)) {
-      const blogname = this.model.getBlogname();
-      const sendToContentScript = (posts: Array<TumblrPost>) => {
-        this.contentScriptService.sendPosts(posts);
-      };
-      this.hijacker
-        .hijack(blogname)
-        .subscribe(sendToContentScript);
-    } else {
-      logger.error('Unable to highlight posts on this archive');
+    const blogname = this.model.getBlogname();
+    if (!blogname) {
+      console.warn('Unable to hijack requests, no blogname available');
+      return;
     }
+
+    const sendToContentScript = (posts: Array<TumblrPost>) => {
+      this.contentScriptService.sendPosts(posts);
+    };
+
+    this.hijacker
+      .hijack(blogname)
+      .subscribe(sendToContentScript);
   } 
 }
 

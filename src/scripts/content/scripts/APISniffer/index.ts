@@ -7,6 +7,8 @@ import APISnifferFetchHijacker from './APISnifferFetchHijacker';
 import APISnifferController from './APISnifferController';
 import APISnifferScript from './APISniffer';
 
+console.log('luis sanity log');
+
 /* instantiate services */
 const contentScriptService = new APISnifferContentScriptService();
 
