@@ -6,9 +6,10 @@
     "type": "git",
     "url": "git+https://github.com/lluisrojass/tumblr-personal-post-highlighter.git"
   },
-  "keywords": [
-    "tumblr"
-  ],
+  "keywords": [],
+  "engines": {
+    "node": "^18"
+  },
   "author": "Luis Rojas <lluisrojass@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -16,31 +17,30 @@
   },
   "homepage": "https://github.com/lluisrojass/tumblr-personal-post-highlighter#readme",
   "dependencies": {
-    "rxjs": "^6.5.2"
+    "rxjs": "^6.6.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/preset-typescript": "^7.3.3",
+    "@babel/core": "^7.21.3",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "@rollup/plugin-alias": "^4.0.3",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
     "@types/chrome": "0.0.88",
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.2",
-    "@types/sinon": "^7.0.13",
-    "babel-jest": "^24.8.0",
-    "husky": "^3.0.5",
-    "jest": "^24.9.0",
-    "rollup": "^1.12.1",
-    "rollup-plugin-alias": "^2.0.0",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-banner": "^0.2.0",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-terser": "^4.0.4",
-    "sinon": "^7.3.2",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.5.3"
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.3",
+    "@types/sinon": "^10.0.13",
+    "babel-jest": "^29.5.0",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "rollup": "^3.19.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "sinon": "^15.0.2",
+    "ts-jest": "^29.0.5",
+    "typescript": "^4.9.5"
   }
 }
