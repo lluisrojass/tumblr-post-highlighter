@@ -639,8 +639,16 @@ export interface APISnifferController extends ExtScriptController {
    * @returns {void}
    */
   hijackAjaxRequests(): void;
-
+  /**
+   * Calculate the blog's name and update internal controller model  
+   * 
+   * @returns {void}
+   */
   obtainBlogName(): void;
+  /**
+   * Calculate the blog's page state and update internal controller model. This
+   * function utilize the "readystatechange" change event.
+   */
   obtainPageStatus(): Promise<void>;
 }
 export interface APISnifferControllerStatics {

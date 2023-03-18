@@ -44,7 +44,6 @@ const Controller: CSControllerStatics = class C implements CSController {
 
     const observer = {
       next: (posts: Array<TumblrPost>) => {
-        console.log('luis handling incoming posts!', JSON.stringify(posts, null, 3));
         updateModel(posts);
         highlightPosts(posts);
       },
@@ -107,7 +106,6 @@ const Controller: CSControllerStatics = class C implements CSController {
 
           isBlogExcluded
             .then((isExcluded) => {
-              console.log('luis handling sniffer status update', isExcluded);
               updateExcludedModel(isExcluded);
               highlightCurrentPosts(isExcluded);
               notifyPageAction(isExcluded);

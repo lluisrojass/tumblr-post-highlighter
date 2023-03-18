@@ -27,11 +27,9 @@ const FetchHijacker: APISnifferHijackerStatics = class Hijacker implements APISn
         const fetch = async (info: RequestInfo | URL, init?: RequestInit) => {
           const requestAnalyzer = new RequestAnalyzer(blogname);
           if (!requestAnalyzer.isAPICall(info, init)) {
-            console.log('outcome of isAPICall was false!', info);
             return originalFetch(info, init);
           }
     
-          console.log('outcome of isAPICall was true', info);
           const response = await originalFetch(info, init); 
           if (response.ok) {
             const postsExtractor = new PostsExtractor(blogname);
@@ -40,7 +38,6 @@ const FetchHijacker: APISnifferHijackerStatics = class Hijacker implements APISn
             postsExtractor
               .extract(response)
               .then((posts: Array<TumblrPost>) => {
-                console.log('hello! submitting posts: ', JSON.stringify(posts, null, 3));
                 if (!posts.length) return;
                 subscriber.next(posts);
               });

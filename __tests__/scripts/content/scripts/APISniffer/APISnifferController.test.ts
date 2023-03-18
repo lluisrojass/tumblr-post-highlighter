@@ -56,64 +56,67 @@ describe('APISnifferController', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
+
+  describe('obtainBlogName()', () => {
+    it('should obtain blog name from document and update model', () => {
+      (extractBlogname as SinonStub).returns('support');
+
+      controller.obtainBlogName();
+      
+      expect((extractBlogname as SinonStub).calledOnce).toBeTruthy();
+      expect((model.setBlogname as SinonStub).calledOnce).toBeTruthy();
+    });
+
+    it('should obtain blog name from window and update model', () => {
+      (extractBlogname as SinonStub).returns('');
+
+      controller.obtainBlogName();
+      
+      expect((extractBlogname as SinonStub).calledOnce).toBeTruthy();
+      expect((model.setBlogname as SinonStub).calledOnce).toBeFalsy();
+    });
+  })
   
-  describe('analyzePage()', () => {
+  describe('obtainPageStatus()', () => {
     let setStatusStub: SinonStub;
-    let setBlognameStub: SinonStub;
     let isWindowSupportedStub: SinonStub;
     let isHealthyArchiveStub: SinonStub;
 
     beforeEach(() => {
       setStatusStub = model.setStatus as SinonStub;
-      setBlognameStub = model.setBlogname as SinonStub;
       isWindowSupportedStub = supportAnalyzer.isWindowSupported as SinonStub;
       isHealthyArchiveStub = supportAnalyzer.isHealthyArchive as SinonStub;
     });
 
-    it('should update model status to "unsupported" when window not supported', () => {
+    it('should update model status to "unsupported" when window not supported', async () => {
       isWindowSupportedStub.returns(false);
       isHealthyArchiveStub.returns(true);
 
-      controller.analyzePage();
-      
+      await controller.obtainPageStatus();
+
       expect(setStatusStub.calledOnce).toBeTruthy();
-      expect(setBlognameStub.calledOnce).toBeFalsy();
       expect(setStatusStub.args[0][0]).toBe(PageStatus.UNSUPPORTED);
     });
 
-    it('should update model status to "not healthy" when window not healthy', () => {
+    it('should update model status to "not healthy" when window not healthy', async () => {
       isWindowSupportedStub.returns(true);
       isHealthyArchiveStub.returns(false);
 
-      controller.analyzePage();
+      await controller.obtainPageStatus();
       
       expect(setStatusStub.calledOnce).toBeTruthy();
-      expect(setBlognameStub.calledOnce).toBeFalsy();
       expect(setStatusStub.args[0][0]).toBe(PageStatus.NOT_OK_ARCHIVE);
     });
 
-    it('should update model to "unsupported" when blogname cannot be parsed', () => {
-      isWindowSupportedStub.returns(true);
-      isHealthyArchiveStub.returns(true);
-      (extractBlogname as SinonStub).returns('');
-      
-      controller.analyzePage();
-
-      expect(setStatusStub.calledOnce).toBeTruthy();
-      expect(setBlognameStub.calledOnce).toBeFalsy();
-      expect(setStatusStub.args[0][0]).toBe(PageStatus.UNSUPPORTED);
-    });
-
-    it('should update model to "ok" when both window is supported and healthy, and blogname is parsed', () => {
+    it('should update model to "ok" when both window is supported and healthy, and blogname is parsed', async () => {
       isWindowSupportedStub.returns(true);
       isHealthyArchiveStub.returns(true);
 
       (extractBlogname as SinonStub).returns(blogname);
       
-      controller.analyzePage();
+      await controller.obtainPageStatus();
       
       expect(setStatusStub.calledOnce).toBeTruthy();
-      expect(setBlognameStub.calledOnce).toBeTruthy();
       expect(setStatusStub.args[0][0]).toBe(PageStatus.OK);
     });
   });

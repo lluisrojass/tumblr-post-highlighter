@@ -31,10 +31,15 @@ const Controller: APISnifferControllerStatics = class C implements APISnifferCon
   }
   
   public obtainPageStatus = (): Promise<void> => {
-    if (document.readyState === 'complete') {
+
+    const obtainStatusAndUpdateModel = () => {
       const status = this.obtainPageStatusFromDocument();
-      console.log('LUIS setting status as', status);
       this.model.setStatus(status);
+    }
+    
+    if (document.readyState === 'complete') {
+      obtainStatusAndUpdateModel();
+      return Promise.resolve(undefined);
     }
 
     return new Promise((resolve) => {
@@ -42,9 +47,7 @@ const Controller: APISnifferControllerStatics = class C implements APISnifferCon
         // @ts-ignore
         if (e.target?.readyState !== 'complete') return;
 
-        const status = this.obtainPageStatusFromDocument();
-        console.log('LUIS setting status as (from handler)', status);
-        this.model.setStatus(status);
+        obtainStatusAndUpdateModel();
         resolve();
       });
     })
@@ -61,7 +64,6 @@ const Controller: APISnifferControllerStatics = class C implements APISnifferCon
     const status = this.model.getStatus();
     const blogname = this.model.getBlogname();
     
-    console.log('sending update to content script!', status, blogname);
     this.contentScriptService.sendUpdate({ 
       status,
       blogname

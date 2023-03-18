@@ -14,7 +14,8 @@ describe('APISniffer', () => {
   /* general setup */
   beforeEach(() => {
     controllerStub = {
-      analyzePage: sinon.stub(),
+      obtainBlogName: sinon.stub(),
+      obtainPageStatus: sinon.stub(),
       hijackAjaxRequests: sinon.stub(),
       sendUpdateToContentScript: sinon.stub()
     };
@@ -22,14 +23,20 @@ describe('APISniffer', () => {
   });
 
   describe('run()', () => {
-    it('should analyze page', () => {
+    it('should obtain blog name page', () => {
       apiSnifferScript.run();
-      const stub = controllerStub.analyzePage as SinonStub;
+      const stub = controllerStub.obtainBlogName as SinonStub;
       expect(stub.calledOnce).toBeTruthy();
     });
 
-    it('should send initial update to content script', () => {
+    it('should obtain page status', () => {
       apiSnifferScript.run();
+      const stub = controllerStub.obtainPageStatus as SinonStub;
+      expect(stub.calledOnce).toBeTruthy();
+    });
+
+    it('should send initial update to content script', async () => {
+      await apiSnifferScript.run();
       const stub = controllerStub.sendUpdateToContentScript as SinonStub;
       expect(stub.calledOnce).toBeTruthy();
     });

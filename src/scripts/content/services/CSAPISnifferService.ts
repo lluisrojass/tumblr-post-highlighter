@@ -18,9 +18,7 @@ import APISnifferUpdate from '~/scripts/content/messages/APISnifferUpdate';
 export default class APISnifferService implements CSAPISnifferService {
   public listenForPosts = () => {
     return new Observable<PostsMessageContainer>((subscriber) => {
-      console.log('luis attaching posts listener');
       document.addEventListener(MessageTypes.NEW_POSTS, ((event: PostsEvent<Array<MaybeTumblrPost>>) => {
-        console.log('luis got posts at first observable listener');
         if (!APISnifferPosts.isTrustworthy(event)) return;
 
         const messageContainer = new APISnifferPosts(event);
