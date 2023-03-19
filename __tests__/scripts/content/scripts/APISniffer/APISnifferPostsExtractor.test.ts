@@ -132,58 +132,6 @@ describe('PostsExtractor', () => {
       expect(posts).toStrictEqual(expectedPosts);
     });
 
-    it('should identify personal posts from optional sourceUrl property', async () => {
-      const apiPosts = [
-        {
-          id: 'id-1',
-          postUrl: `https://${blogname}.tumblr.com/posts/123-1`,
-          sourceUrl: `https://${blogname}.tumblr.com`,
-          trail: []
-        },
-        {
-          id: 'id-2',
-          postUrl: `https://${blogname}.tumblr.com/posts/123-2`,
-          sourceUrl: `https://${blogname}-bad.tumblr.com`,
-          trail: []
-        },
-        {
-          id: 'id-3',
-          postUrl: `https://${blogname}.tumblr.com/posts/123-3`,
-          sourceUrl: `https://some-other-blog.tumblr.com`,
-          trail: []
-        },
-        {
-          id: 'id-4',
-          postUrl: `https://${blogname}.tumblr.com/posts/123-4`,
-          sourceUrl: `https://${blogname}.tumblr.com`,
-          trail: []
-        }
-      ];
-
-      const fetchResponseBody = {
-        clone: () => ({
-          json: async () => ({
-            response: {
-              posts: apiPosts
-            }
-          })
-        })
-      };
-      const posts = await postsExtractor.extract(fetchResponseBody as any);
-      const expectedPosts = [
-        {
-          id: 'id-1',
-          url: `https://${blogname}.tumblr.com/posts/123-1`,
-        },
-        {
-          id:'id-4',
-          url: `https://${blogname}.tumblr.com/posts/123-4`,
-        }
-      ];
-      
-      expect(posts).toStrictEqual(expectedPosts);
-    });
-
     it('should handle a Response object without Response mixins', async () => {
       const fetchResponseBody = {
         clone: () => ({})

@@ -171,7 +171,7 @@ describe('CSAPISnifferService', () => {
     let prependStub: SinonStub;
     
     beforeEach(() => {
-      prependStub = sinon.stub(document.head, 'prepend');
+      prependStub = sinon.stub(document.documentElement, 'prepend');
     });
 
     afterEach(() => {

@@ -1,38 +1,25 @@
-# Personal Post Highlighter for Tumblr
+# <img src="icons/on/32x32.png" width="24" /> Tumblr Personal Post Highlighter 
 
-<img src="resources/example.gif">
+[Click here to add to chrome](https://chrome.google.com/webstore/detail/tumblr-personal-post-high/lcfdkkodbhjgooidmbbofnafakdjnblk)
 
-## What is this?
+This is a Chrome browser extension that highlights a Tumblr blog's personally uploaded content. Tumblr has historically failed to provide this functionality to users, with many resorting to third party alternatives. 
 
-This is a tiny chrome extension that highlights a blog's personally uploaded content. Tumblr has historically failed to provide this functionality to end users, leaving many to resort to third party alternatives. [Click here to add to chrome](https://chrome.google.com/webstore/detail/tumblr-personal-post-high/lcfdkkodbhjgooidmbbofnafakdjnblk).
 
-This application is the successor to the now outdated [tumblr-scraper](https://github.com/lluisrojass/tumblr-scraper). 
+On Quora: [On Tumblr, how do you view somebody's original posts?](https://www.quora.com/On-Tumblr-how-do-you-view-somebodys-original-posts)  
+
+> ...
+> If what you’re referring to is how to find someone’s original posts in their blog, that can be difficult. Some people who keep their blogs organized tend to tag their own posts. If that’s the case with that “somebody” then just find which tag they’re using for their original posts and check it out. If they don’t tag their original posts then it’s going to be quite hard to find them without navigating all the way through their blog.  
+
+## Why an extension?  
+
+There exist dedicated online tools which perform this function, such as [jetblackcode's post finder utility](https://jetblackcode.com/TumblrOriginalPostFinder). However, these tools are trying to deliver dedicated web experiences, and impose behavior such as pagination or very limited filter/sort functionality. This extension enhances your native Tumblr browser experience, giving you the freedom to use Tumblr's own filter/sort functionality and UI. 
 
 ## Usage
 
-Just add the extension to your chrome browser and uploaded posts will now sport a green indicator. To toggle highlighting for a blog, click the green application icon. The extension will remember this decision and remain hidden until it is toggled back on. 
+Add the extension to Chrome and personally uploaded posts will now show a green indicator on a blog's archive. To toggle highlighting on/off for a blog, click the green application icon.
 
-## Commands
 
-This project uses [GNU make](https://www.gnu.org/software/make/) to manage/describe scripts.  
-
-`$ gmake build`
-
-Creates a production ready application bundle.
-
-Individual packages can also be built via the `build.content` & `build.background` commands.
-
-`$ gmake watch.content` | `$ gmake watch.background`
-
-Creates a development bundle, runs watch on relevant source files.
-
-`$ gmake test`
-
-Executes unit tests. Testing done via [Jest](https://github.com/facebook/jest)
-
-`$ gmake clean` 
-
-Cleans all generated files/directories. 
+<img src="./screenshot.png" width="800">
 
 ## Licence 
 

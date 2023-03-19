@@ -19,7 +19,8 @@ describe('SupportAnalyzer', () => {
     });
 
     it('should indicate lack of support when fetch API unavailable', () => {
-      delete window.fetch;
+      // @ts-ignore-next-line
+      window.fetch = undefined;
       const isWindowSupported = supportAnalyzer.isWindowSupported();
       expect(isWindowSupported).toBeFalsy();
     });
@@ -27,6 +28,8 @@ describe('SupportAnalyzer', () => {
 
   describe('isHealthyArchive()', () => {
     it('should indicate support when tumblr v2 state key present and non error-ed out', () => {
+      // @ts-ignore
+      window.tumblr = { isTumblr: true };
       const isHealthy = supportAnalyzer.isHealthyArchive();
       expect(isHealthy).toBeTruthy();
     });
@@ -34,17 +37,7 @@ describe('SupportAnalyzer', () => {
     it('should indicate lack of support when tumblr v2 state key missing', () => {
       delete (window as { 
         [key: string]: any 
-      })[config.tumblr.v2StateKey];
-      const isHealthy = supportAnalyzer.isHealthyArchive();
-      expect(isHealthy).toBeFalsy();
-    });
-
-    it('should indicate lack of support when tumblr v2 state indicate server-error', () => {
-      (window as { 
-        [key: string]: any 
-      })[config.tumblr.v2StateKey] = {
-        [config.tumblr.v2ServerErrorKey]: true
-      };
+      }).tumblr;
       const isHealthy = supportAnalyzer.isHealthyArchive();
       expect(isHealthy).toBeFalsy();
     });

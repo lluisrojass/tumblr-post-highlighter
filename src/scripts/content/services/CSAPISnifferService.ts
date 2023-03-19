@@ -10,7 +10,7 @@ import {
   APISnifferUpdateEvent,
   APISnifferUpdateMessageContainer,
   CSAPISnifferService,
-} from '~/types';
+} from '~/types'; 
 import config from '~/config/index';
 import APISnifferPosts from '~/scripts/content/messages/APISnifferPosts';
 import APISnifferUpdate from '~/scripts/content/messages/APISnifferUpdate';
@@ -45,7 +45,7 @@ export default class APISnifferService implements CSAPISnifferService {
   }
 
   public injectAPISniffer = (): void => {
-    const head = document.head || document.querySelector('head');
+    const documentElement = document.documentElement;
     const script = document.createElement('script');
     const textNode = document.createTextNode(APISnifferScript);
     
@@ -53,6 +53,6 @@ export default class APISnifferService implements CSAPISnifferService {
     script.setAttribute('version', config.version);
     script.setAttribute('name', config.name);
 
-    head.prepend(script);
+    documentElement.prepend(script);
   }
 }

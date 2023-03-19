@@ -569,7 +569,7 @@ export interface APISnifferRequestAnalyzer {
    * 
    * @returns {boolean}
    */
-  isAPICall(info: RequestInfo, init?: RequestInit): boolean;
+  isAPICall(info: RequestInfo | URL, init?: RequestInit): boolean;
 }
 export interface APISnifferRequestAnalyzerStatics {
   /**
@@ -628,12 +628,6 @@ export interface APISnifferHijackerStatics {
 }
 export interface APISnifferController extends ExtScriptController {
   /**
-   * Analyze the current page, update model with outcome of analysis.
-   * 
-   * @returns {void}
-   */
-  analyzePage(): void;
-  /**
    * Send an update to the content script.
    * 
    * @returns {void}
@@ -645,6 +639,17 @@ export interface APISnifferController extends ExtScriptController {
    * @returns {void}
    */
   hijackAjaxRequests(): void;
+  /**
+   * Calculate the blog's name and update internal controller model  
+   * 
+   * @returns {void}
+   */
+  obtainBlogName(): void;
+  /**
+   * Calculate the blog's page state and update internal controller model. This
+   * function utilize the "readystatechange" change event.
+   */
+  obtainPageStatus(): Promise<void>;
 }
 export interface APISnifferControllerStatics {
   /**

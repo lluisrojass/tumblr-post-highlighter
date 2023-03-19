@@ -10,13 +10,7 @@ export default class SupportAnalyzer implements APISnifferSupportAnalyzer {
   }
 
   public isHealthyArchive = () => {
-    const v2State = window && (window as { 
-      [index: string]: any 
-    })[config.tumblr.v2StateKey];
-
-    if (!isObj(v2State)) return false;
-    if (v2State[config.tumblr.v2ServerErrorKey] || !Object.keys(v2State).length) return false;
-    
-    return true;
+    const tumblrGlobal = (window as any).tumblr;
+    return isObj(tumblrGlobal);
   }
 }
