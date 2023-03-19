@@ -14,7 +14,7 @@ Add the extension to Chrome and personally uploaded posts will now show a green 
 [Click here to add to chrome](https://chrome.google.com/webstore/detail/tumblr-personal-post-high/lcfdkkodbhjgooidmbbofnafakdjnblk).
 
 
-<img src="./screenshot.png" width="300">
+<img src="./screenshot.png" width="800">
 
 ## Licence 
 
