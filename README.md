@@ -1,4 +1,4 @@
-# Personal Post Highlighter for Tumblr
+# <img src="icons/on/32x32.png" width="24" /> Tumblr Personal Post Highlighter 
 
 [Click here to add to chrome](https://chrome.google.com/webstore/detail/tumblr-personal-post-high/lcfdkkodbhjgooidmbbofnafakdjnblk).
 
