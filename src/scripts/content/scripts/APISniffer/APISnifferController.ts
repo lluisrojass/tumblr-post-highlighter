@@ -10,7 +10,6 @@ import {
 } from '~/types';
 import extractBlogname from '~/utils/extractBlogname';
 import logger from '~/logger/index';
-import isOKStatus from '~/utils/isOKStatus';
 
 const Controller: APISnifferControllerStatics = class C implements APISnifferController {
   constructor(
