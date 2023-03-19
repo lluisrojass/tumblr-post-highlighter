@@ -1,6 +1,6 @@
 # <img src="icons/on/32x32.png" width="24" /> Tumblr Personal Post Highlighter 
 
-[Click here to add to chrome](https://chrome.google.com/webstore/detail/tumblr-personal-post-high/lcfdkkodbhjgooidmbbofnafakdjnblk).
+[Click here to add to chrome](https://chrome.google.com/webstore/detail/tumblr-personal-post-high/lcfdkkodbhjgooidmbbofnafakdjnblk)
 
 This is a Chrome browser extension that highlights a Tumblr blog's personally uploaded content. Tumblr has historically failed to provide this functionality to users, with many resorting to third party alternatives. 
 
