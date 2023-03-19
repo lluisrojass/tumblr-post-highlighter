@@ -7,7 +7,6 @@ import {
 } from '~/types';
 import logger from '~/logger/index';
 import isObj from '~/utils/isObj';
-import extractBlogname from '~/utils/extractBlogname';
 
 const PostsExtractor: APISnifferPostsExtractorStatics = class Extractor implements APISnifferPostsExtractor {
     constructor(private blogname: string) {} 
@@ -17,34 +16,16 @@ const PostsExtractor: APISnifferPostsExtractorStatics = class Extractor implemen
         if (!(isObj(post) && Array.isArray(post.trail) && !!post.postUrl)) { /* sanity */
           return false;
         }
+        if (!post.trail.length) return true;
         
-        if (post.trail.length) {
-          const trail = post.trail;
-          const trailBlogname =
-            isObj(trail[0]) && 
-            trail[0].blog && 
-            isObj(trail[0].blog) && 
-            trail[0].blog.name;
+        const trail = post.trail;
+        const trailBlogname =
+          isObj(trail[0]) && 
+          trail[0].blog && 
+          isObj(trail[0].blog) && 
+          trail[0].blog.name;
 
-          return trailBlogname === this.blogname;
-        } else if (post.sourceUrl) {
-          let hostname; 
-          try {
-            ({
-              hostname 
-            } = new URL(post.sourceUrl));
-            const sourceBlog = extractBlogname(hostname);
-            return sourceBlog === this.blogname;
-          } catch (err) {
-            if (!(err instanceof TypeError)) {
-              logger.warn('unknown error parsing post\'s \`sourceUrl\`');
-            }
-          }
-
-          return false;
-        } else {
-          return true;
-        }
+        return trailBlogname === this.blogname;
       }
 
       const mapper = (post: NativeTumblrPost): TumblrPost => ({
